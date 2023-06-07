@@ -1,0 +1,44 @@
+<div class="manipulation-inputs">
+  <button (click)="addBox()">
+    Nova caixa
+  </button>
+  <div *ngFor="let box of boxes" class="manipulation-inputs__box">
+    <label>
+      cx
+      <input type="number" [(ngModel)]="box.cx" (ngModelChange)="applyChange(box)">
+    </label>
+    <label>
+      cy
+      <input type="number" [(ngModel)]="box.cy" (ngModelChange)="applyChange(box)">
+    </label>
+    <label>
+      scaleX
+      <input type="number" [(ngModel)]="box.scaleX" (ngModelChange)="applyChange(box)">
+    </label>
+    <label>
+      scaleY
+      <input type="number" [(ngModel)]="box.scaleY" (ngModelChange)="applyChange(box)">
+    </label>
+    <label>
+      rotation
+      <input type="number" [(ngModel)]="box.rotation" (ngModelChange)="applyChange(box)">
+    </label>
+<!--    <label>-->
+<!--      color-->
+<!--      <input type="text" [(ngModel)]="box.color">-->
+<!--    </label>-->
+  </div>
+</div>
+<div
+  (mousemove)="move($event)"
+  (mouseup)="selectedBox = null"
+  class="manipulation-container">
+  <div
+    *ngFor="let box of boxes"
+    class="box"
+    [style.transform]="box.transform"
+    [style.background-color]="box.color"
+    (mousedown)="startMoving($event, box)"
+  >
+  </div>
+</div>
