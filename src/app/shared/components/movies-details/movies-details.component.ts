@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import { IMovie } from "../../model/movies.interface";
 
 @Component({
@@ -11,4 +11,10 @@ export class MoviesDetailsComponent {
   @Input()
   movie: IMovie | null = null;
 
+  @Output()
+  finishedUpload: EventEmitter<string> = new EventEmitter<string>();
+
+  upload() {
+    this.finishedUpload.next(`arquivo${Math.random()}.txt`);
+  }
 }

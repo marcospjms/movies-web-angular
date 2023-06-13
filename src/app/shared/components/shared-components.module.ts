@@ -9,6 +9,7 @@ import { LeftMenuComponent } from './left-menu/left-menu.component';
 import { MoviesDetailsComponent } from './movies-details/movies-details.component';
 import { DivManipulationComponent } from './div-manipulation/div-manipulation.component';
 import {FormsModule} from "@angular/forms";
+import { BoxComponent } from './div-manipulation/box/box.component';
 
 const COMPONENTS: any[] = [
   ContainerComponent,
@@ -18,7 +19,8 @@ const COMPONENTS: any[] = [
   UserInfoComponent,
   LeftMenuComponent,
   MoviesDetailsComponent,
-  DivManipulationComponent
+  DivManipulationComponent,
+  BoxComponent,
 ];
 
 @NgModule({

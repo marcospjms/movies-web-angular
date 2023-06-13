@@ -7,6 +7,8 @@ import { IMovie } from "../../model/movies.interface";
   styleUrls: ['./favorite-movies.component.scss']
 })
 export class FavoriteMoviesComponent {
+  newFile: string = '';
+
   movies: IMovie[] = [
     { id: 1, name: 'Batman', description: 'Filme sobre o homem morcego', rate: 5 },
     { id: 2, name: 'Batman e robing', description: 'Filme sobre o homem morcego e seu parceiro', rate: 4 },

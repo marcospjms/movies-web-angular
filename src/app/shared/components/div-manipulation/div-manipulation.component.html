@@ -23,22 +23,19 @@
       rotation
       <input type="number" [(ngModel)]="box.rotation" (ngModelChange)="applyChange(box)">
     </label>
-<!--    <label>-->
-<!--      color-->
-<!--      <input type="text" [(ngModel)]="box.color">-->
-<!--    </label>-->
+    <label>
+      color
+      <input type="text" [(ngModel)]="box.color">
+    </label>
   </div>
 </div>
 <div
-  (mousemove)="move($event)"
-  (mouseup)="selectedBox = null"
   class="manipulation-container">
-  <div
+  <app-box
     *ngFor="let box of boxes"
-    class="box"
-    [style.transform]="box.transform"
-    [style.background-color]="box.color"
+    [box]="box"
+    [ref]="box.transform"
     (mousedown)="startMoving($event, box)"
   >
-  </div>
+  </app-box>
 </div>

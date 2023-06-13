@@ -44,6 +44,7 @@ export class DivManipulationComponent implements OnInit {
     console.log('start moving', this.selectedBox, this.diff);
   }
 
+  @HostListener('mousemove', ['$event'])
   move($event: MouseEvent) {
     if (!this.selectedBox) {
       return;
@@ -51,6 +52,11 @@ export class DivManipulationComponent implements OnInit {
     this.selectedBox.cx = $event.x - this.diff.x;
     this.selectedBox.cy = $event.y - this.diff.y;
     this.applyChange(this.selectedBox);
+  }
+
+  @HostListener('mouseup')
+  mouseup() {
+    this.selectedBox = null;
   }
 
   addBox() {
