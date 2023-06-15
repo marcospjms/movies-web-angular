@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ListMoviesPublicComponent } from './list-movies.component';
+import { EditCategoryComponent } from './edit.component';
 
-describe('ListMoviesComponent', () => {
-  let component: ListMoviesPublicComponent;
-  let fixture: ComponentFixture<ListMoviesPublicComponent>;
+describe('EditComponent', () => {
+  let component: EditCategoryComponent;
+  let fixture: ComponentFixture<EditCategoryComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ListMoviesPublicComponent ]
+      declarations: [ EditCategoryComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ListMoviesPublicComponent);
+    fixture = TestBed.createComponent(EditCategoryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,5 +1,10 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import { IMovie } from "../../model/movies.interface";
+import {IMovie} from "../../model/movie.interface";
+
+export interface FavoriteChange {
+  movie: IMovie | null;
+  favorite: boolean
+}
 
 @Component({
   selector: 'app-movies-details',
@@ -12,9 +17,5 @@ export class MoviesDetailsComponent {
   movie: IMovie | null = null;
 
   @Output()
-  finishedUpload: EventEmitter<string> = new EventEmitter<string>();
-
-  upload() {
-    this.finishedUpload.next(`arquivo${Math.random()}.txt`);
-  }
+  favoriteChanged: EventEmitter<FavoriteChange> = new EventEmitter<FavoriteChange>();
 }

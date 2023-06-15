@@ -1,0 +1,23 @@
+<table class="custom-table">
+  <thead>
+    <tr>
+      <td>#</td>
+      <td>Nome</td>
+      <td>Ações</td>
+      <td></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let category of movies; let i = index">
+      <td>{{ category.id }}</td>
+      <td>{{ category.name }}</td>
+      <td>
+        <button (click)="selectedMovie.emit(category)">Editar</button>
+        <button (click)="deleteMovie(i)">Excluir</button>
+      </td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+<button class="create-entity" (click)="createMovie()">Criar categoria</button>

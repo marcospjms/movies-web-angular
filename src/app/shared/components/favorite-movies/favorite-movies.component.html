@@ -3,9 +3,9 @@
 </h1>
 
 <app-movies-details
-  *ngFor="let movie of movies"
+  *ngFor="let movie of favoriteMovies"
   [movie]="movie"
-  (finishedUpload)="newFile = $event"
+  (favoriteChanged)="changeFavorite($event, movie)"
 >
 </app-movies-details>
 

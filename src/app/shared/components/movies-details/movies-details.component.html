@@ -5,8 +5,8 @@
 <div class="description">
   <p>{{ movie?.description }}</p>
   <p>Pontuação: {{ movie?.rate }} estrelas</p>
+  <button (click)="favoriteChanged.emit({ movie: movie, favorite: !movie?.favorite })">
+    <span *ngIf="!movie?.favorite">Marcar como favorito</span>
+    <span *ngIf="movie?.favorite">Desmarcar como favorito</span>
+  </button>
 </div>
-
-<button (click)="upload()">
-  Upload
-</button>

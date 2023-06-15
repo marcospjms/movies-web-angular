@@ -2,8 +2,44 @@
 <app-sidebar>
 </app-sidebar>
 
-<div>
-  <app-favorite-movies>
-  </app-favorite-movies>
+<div class="entities-container">
+  <div class="entity-crud">
+    <h2 (click)="showCategories = !showCategories">
+      Categorias
+      <span *ngIf="!showCategories">(abrir)</span>
+      <span *ngIf="showCategories">(fechar)</span>
+    </h2>
+      <div *ngIf="showCategories">
+        <app-list-categories
+          [categories]="categories"
+          (selectedCategory)="selectedCategory = $event">
+        </app-list-categories>
+        <app-edit-category
+          *ngIf="selectedCategory"
+          [category]="selectedCategory"
+          (savedRequested)="saveCategory($event)"
+        >
+        </app-edit-category>
+      </div>
+    </div>
+  <div class="entity-crud">
+    <h2 (click)="showMovies = !showMovies">
+      Filmes
+      <span *ngIf="!showMovies">(abrir)</span>
+      <span *ngIf="showMovies">(fechar)</span>
+    </h2>
+      <div *ngIf="showMovies">
+        <app-list-movies
+          [movies]="movies"
+          (selectedMovie)="selectedCategory = $event">
+        </app-list-movies>
+        <app-edit-movie
+          *ngIf="selectedCategory"
+          [movie]="selectedCategory"
+          (savedRequested)="saveCategory($event)"
+        >
+        </app-edit-movie>
+      </div>
+    </div>
 </div>
 

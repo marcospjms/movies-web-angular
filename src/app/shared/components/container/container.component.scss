@@ -10,4 +10,18 @@
     width: 80%;
     height: 100%;
   }
+
+  .entities-container {
+    .entity-crud {
+      margin: 1em 0;
+      border: 1px solid #e0d8d8;
+      padding: 1em;
+      h2 {
+        cursor: pointer;
+        background-color: aliceblue;
+        padding: 0.5em;
+      };
+    }
+    padding: 1em;
+  }
 }

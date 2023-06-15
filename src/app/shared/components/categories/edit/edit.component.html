@@ -1,0 +1,17 @@
+<div *ngIf="innerCategory" class="custom-form">
+  <label>
+    Id
+    <input type="number" [(ngModel)]="innerCategory.id" disabled>
+  </label>
+
+  <label>
+    Nome
+    <input type="text" [(ngModel)]="innerCategory.name">
+  </label>
+
+  <button (click)="!!innerCategory.name ? savedRequested.emit(innerCategory): null">
+    <span *ngIf="innerCategory.id">Salvar</span>
+    <span *ngIf="!innerCategory.id">Criar</span>
+  </button>
+
+</div>

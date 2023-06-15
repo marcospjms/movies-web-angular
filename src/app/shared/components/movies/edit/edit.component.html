@@ -1,0 +1,17 @@
+<div *ngIf="innerMovie" class="custom-form">
+  <label>
+    Id
+    <input type="number" [(ngModel)]="innerMovie.id" disabled>
+  </label>
+
+  <label>
+    Nome
+    <input type="text" [(ngModel)]="innerMovie.name">
+  </label>
+
+  <button (click)="!!innerMovie.name ? savedRequested.emit(innerMovie): null">
+    <span *ngIf="innerMovie.id">Salvar</span>
+    <span *ngIf="!innerMovie.id">Criar</span>
+  </button>
+
+</div>
