@@ -9,7 +9,19 @@
     <input type="text" [(ngModel)]="innerMovie.name">
   </label>
 
-  <button (click)="!!innerMovie.name ? savedRequested.emit(innerMovie): null">
+  <label>
+    Categoria
+    <select [(ngModel)]="innerMovie.category" [compareWith]="compareCategory">
+      <option [value]="null">Nenhuma</option>
+      <option *ngFor="let category of categories" [ngValue]="category">
+        #{{ category.id }} - {{ category.name }}
+      </option>
+    </select>
+  </label>
+
+  {{ innerMovie.category?.name || ' - ' }}
+
+  <button (click)="(!!innerMovie.name && !!innerMovie.category) ? save(): null">
     <span *ngIf="innerMovie.id">Salvar</span>
     <span *ngIf="!innerMovie.id">Criar</span>
   </button>

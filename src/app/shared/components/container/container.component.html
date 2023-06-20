@@ -31,12 +31,13 @@
       <div *ngIf="showMovies">
         <app-list-movies
           [movies]="movies"
-          (selectedMovie)="selectedCategory = $event">
+          (selectedMovie)="selectedMovie = $event">
         </app-list-movies>
         <app-edit-movie
-          *ngIf="selectedCategory"
-          [movie]="selectedCategory"
-          (savedRequested)="saveCategory($event)"
+          *ngIf="selectedMovie"
+          [movie]="selectedMovie"
+          [categories]="categories"
+          (savedRequested)="saveMovie($event)"
         >
         </app-edit-movie>
       </div>

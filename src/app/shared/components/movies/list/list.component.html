@@ -3,16 +3,18 @@
     <tr>
       <td>#</td>
       <td>Nome</td>
+      <td>Categoria</td>
       <td>Ações</td>
       <td></td>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let category of movies; let i = index">
-      <td>{{ category.id }}</td>
-      <td>{{ category.name }}</td>
+    <tr *ngFor="let movie of movies; let i = index">
+      <td>{{ movie.id }}</td>
+      <td>{{ movie.name }}</td>
+      <td>{{ movie.category?.name }}</td>
       <td>
-        <button (click)="selectedMovie.emit(category)">Editar</button>
+        <button (click)="selectedMovie.emit(movie)">Editar</button>
         <button (click)="deleteMovie(i)">Excluir</button>
       </td>
       <td></td>
@@ -20,4 +22,4 @@
   </tbody>
 </table>
 
-<button class="create-entity" (click)="createMovie()">Criar categoria</button>
+<button class="create-entity" (click)="createMovie()">Criar filme</button>

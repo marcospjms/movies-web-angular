@@ -30,6 +30,7 @@ export class ContainerComponent {
   ];
 
   selectedCategory: ICategory | null = null;
+  selectedMovie: IMovie | null = null;
 
 
   saveCategory(category: ICategory) {
@@ -41,6 +42,18 @@ export class ContainerComponent {
       this.categories.push({...category, id: nextId + 1});
     }
     this.selectedCategory = null;
+
+  }
+
+  saveMovie(movie: IMovie) {
+    const foundMovie = this.movies.find(c => c.id === movie.id);
+    if (foundMovie) {
+      Object.assign(foundMovie, movie);
+    } else {
+      const nextId = Math.max(...this.movies.map(c => c.id));
+      this.movies.push({...movie, id: nextId + 1});
+    }
+    this.selectedMovie = null;
 
   }
 }
