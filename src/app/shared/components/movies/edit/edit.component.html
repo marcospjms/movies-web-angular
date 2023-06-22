@@ -19,8 +19,6 @@
     </select>
   </label>
 
-  {{ innerMovie.category?.name || ' - ' }}
-
   <button (click)="(!!innerMovie.name && !!innerMovie.category) ? save(): null">
     <span *ngIf="innerMovie.id">Salvar</span>
     <span *ngIf="!innerMovie.id">Criar</span>

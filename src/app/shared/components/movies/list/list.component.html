@@ -1,25 +1,9 @@
-<table class="custom-table">
-  <thead>
-    <tr>
-      <td>#</td>
-      <td>Nome</td>
-      <td>Categoria</td>
-      <td>Ações</td>
-      <td></td>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let movie of movies; let i = index">
-      <td>{{ movie.id }}</td>
-      <td>{{ movie.name }}</td>
-      <td>{{ movie.category?.name }}</td>
-      <td>
-        <button (click)="selectedMovie.emit(movie)">Editar</button>
-        <button (click)="deleteMovie(i)">Excluir</button>
-      </td>
-      <td></td>
-    </tr>
-  </tbody>
-</table>
-
-<button class="create-entity" (click)="createMovie()">Criar filme</button>
+<app-custom-table
+  title="Filmes"
+  [header]="header"
+  [data]="movies"
+  (selectedEntity)="selectedMovie.emit($event)"
+  (deletedEntity)="deleteMovie($event.index)"
+  (creationRequest)="createMovie()"
+>
+</app-custom-table>

@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {ICategory} from "../../model/category.interface";
 import {IMovie} from "../../model/movie.interface";
+import {IUser, rolesEnum} from "../../model/user.interface";
 
 @Component({
   selector: 'app-container',
@@ -8,9 +9,6 @@ import {IMovie} from "../../model/movie.interface";
   styleUrls: ['./container.component.scss']
 })
 export class ContainerComponent {
-
-  showCategories = false;
-  showMovies = true;
 
   categories: ICategory[] = [
     {
@@ -29,8 +27,25 @@ export class ContainerComponent {
     { id: 3, name: 'Outro filme', description: 'Outro filme', rate: 1, favorite: true, category: this.categories[1]  },
   ];
 
+  users: IUser[] = [
+    {
+      id: 1,
+      name: 'Marcos Paulo',
+      roles: [rolesEnum.MANAGER_CATEGORIES],
+    },
+    {
+      id: 2,
+      name: 'Paulo José',
+      roles: [rolesEnum.USER, rolesEnum.MANAGER_MOVIES],
+    },
+  ];
+
   selectedCategory: ICategory | null = null;
   selectedMovie: IMovie | null = null;
+  selectedUser: IUser | null = null;
+
+  constructor() {
+  }
 
 
   saveCategory(category: ICategory) {
@@ -52,6 +67,19 @@ export class ContainerComponent {
     } else {
       const nextId = Math.max(...this.movies.map(c => c.id));
       this.movies.push({...movie, id: nextId + 1});
+    }
+    this.selectedMovie = null;
+
+  }
+
+  saveUser(user: IUser) {
+    const foundUser = this.users.find(c => c.id === user.id);
+    if (foundUser) {
+      console.log(foundUser, user)
+      Object.assign(foundUser, user, { roles: [...user.roles]});
+    } else {
+      const nextId = Math.max(...this.users.map(c => c.id));
+      this.users.push({...user, id: nextId + 1});
     }
     this.selectedMovie = null;
 

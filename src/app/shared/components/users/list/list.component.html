@@ -1,0 +1,9 @@
+<app-custom-table
+  title="usuário"
+  [header]="header"
+  [data]="users"
+  (selectedEntity)="selectedUser.emit($event)"
+  (deletedEntity)="deleteUser($event.index)"
+  (creationRequest)="createUser()"
+>
+</app-custom-table>

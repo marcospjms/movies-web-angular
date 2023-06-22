@@ -1,0 +1,20 @@
+:host {
+  display: block;
+  margin-top: 1em;
+}
+
+
+.crud-roles {
+  margin-top: 1em;
+  span {
+    display: inline-block;
+    margin: 0.1em;
+    padding: 0.5em;
+    background-color: lightgray;
+    border-radius: 10px;
+    button {
+      margin-top: 0;
+      cursor: pointer;
+    }
+  }
+}

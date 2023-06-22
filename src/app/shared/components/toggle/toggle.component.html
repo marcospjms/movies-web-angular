@@ -1,0 +1,10 @@
+<div class="entity-crud">
+  <h2 (click)="show = !show">
+    {{ label }}
+    <span *ngIf="!show">(abrir)</span>
+    <span *ngIf="show">(fechar)</span>
+  </h2>
+  <div *ngIf="show">
+    <ng-content></ng-content>
+  </div>
+</div>

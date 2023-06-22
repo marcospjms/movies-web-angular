@@ -14,6 +14,10 @@ import { ListCategoriesComponent } from './categories/list/list.component';
 import { EditCategoryComponent } from './categories/edit/edit.component';
 import {ListMoviesComponent} from "./movies/list/list.component";
 import {EditMovieComponent} from "./movies/edit/edit.component";
+import {ListUsersComponent} from "./users/list/list.component";
+import {EditUserComponent} from "./users/edit/edit.component";
+import { ToggleComponent } from './toggle/toggle.component';
+import { CustomTableComponent } from './custom-table/custom-table.component';
 
 const COMPONENTS: any[] = [
   ContainerComponent,
@@ -29,11 +33,15 @@ const COMPONENTS: any[] = [
   EditCategoryComponent,
   ListMoviesComponent,
   EditMovieComponent,
+  ListUsersComponent,
+  EditUserComponent,
 ];
 
 @NgModule({
   declarations: [
     ...COMPONENTS,
+    ToggleComponent,
+    CustomTableComponent,
   ],
     exports: [
         ...COMPONENTS,

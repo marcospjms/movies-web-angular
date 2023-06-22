@@ -3,44 +3,48 @@
 </app-sidebar>
 
 <div class="entities-container">
-  <div class="entity-crud">
-    <h2 (click)="showCategories = !showCategories">
-      Categorias
-      <span *ngIf="!showCategories">(abrir)</span>
-      <span *ngIf="showCategories">(fechar)</span>
-    </h2>
-      <div *ngIf="showCategories">
-        <app-list-categories
-          [categories]="categories"
-          (selectedCategory)="selectedCategory = $event">
-        </app-list-categories>
-        <app-edit-category
-          *ngIf="selectedCategory"
-          [category]="selectedCategory"
-          (savedRequested)="saveCategory($event)"
-        >
-        </app-edit-category>
-      </div>
-    </div>
-  <div class="entity-crud">
-    <h2 (click)="showMovies = !showMovies">
-      Filmes
-      <span *ngIf="!showMovies">(abrir)</span>
-      <span *ngIf="showMovies">(fechar)</span>
-    </h2>
-      <div *ngIf="showMovies">
-        <app-list-movies
-          [movies]="movies"
-          (selectedMovie)="selectedMovie = $event">
-        </app-list-movies>
-        <app-edit-movie
-          *ngIf="selectedMovie"
-          [movie]="selectedMovie"
-          [categories]="categories"
-          (savedRequested)="saveMovie($event)"
-        >
-        </app-edit-movie>
-      </div>
-    </div>
+  <app-toggle
+    label="Categorias"
+  >
+    <app-list-categories
+      [categories]="categories"
+      (selectedCategory)="selectedCategory = $event">
+    </app-list-categories>
+    <app-edit-category
+      *ngIf="selectedCategory"
+      [category]="selectedCategory"
+      (savedRequested)="saveCategory($event)"
+    >
+    </app-edit-category>
+  </app-toggle>
+  <app-toggle
+    label="Filmes"
+  >
+    <app-list-movies
+      [movies]="movies"
+      (selectedMovie)="selectedMovie = $event">
+    </app-list-movies>
+    <app-edit-movie
+      *ngIf="selectedMovie"
+      [movie]="selectedMovie"
+      [categories]="categories"
+      (savedRequested)="saveMovie($event)"
+    >
+    </app-edit-movie>
+  </app-toggle>
+  <app-toggle
+    label="Usuários"
+  >
+    <app-list-users
+      [users]="users"
+      (selectedUser)="selectedUser = $event">
+    </app-list-users>
+    <app-edit-user
+      *ngIf="selectedUser"
+      [user]="selectedUser"
+      (savedRequested)="saveUser($event)"
+    >
+    </app-edit-user>
+  </app-toggle>
 </div>
 

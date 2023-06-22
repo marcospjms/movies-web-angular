@@ -1,23 +1,9 @@
-<table class="custom-table">
-  <thead>
-    <tr>
-      <td>#</td>
-      <td>Nome</td>
-      <td>Ações</td>
-      <td></td>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let category of categories; let i = index">
-      <td>{{ category.id }}</td>
-      <td>{{ category.name }}</td>
-      <td>
-        <button (click)="selectedCategory.emit(category)">Editar</button>
-        <button (click)="deleteCategory(i)">Excluir</button>
-      </td>
-      <td></td>
-    </tr>
-  </tbody>
-</table>
-
-<button class="create-entity" (click)="createCategory()">Criar categoria</button>
+<app-custom-table
+  title="categoria"
+  [header]="header"
+  [data]="categories"
+  (selectedEntity)="selectedCategory.emit($event)"
+  (deletedEntity)="deleteCategory($event.index)"
+  (creationRequest)="createCategory()"
+>
+</app-custom-table>
