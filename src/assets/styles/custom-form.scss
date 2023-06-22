@@ -4,6 +4,14 @@
     width: 100%;
   }
   button {
+    display: block;
     margin-top: 1em;
+  }
+  .input-error {
+    border-color: red;
+  }
+  .input-error-msg {
+    font-size: 0.8em;
+    color: red;
   }
 }

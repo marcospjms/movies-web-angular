@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
 import {ICategory} from "../../../model/category.interface";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-edit-category',
@@ -8,17 +9,33 @@ import {ICategory} from "../../../model/category.interface";
 })
 export class EditCategoryComponent implements OnChanges {
 
+  form: FormGroup = this._formBuilder.group({});
+
   @Input()
   category: ICategory | null = null;
 
   @Output()
   savedRequested: EventEmitter<ICategory> = new EventEmitter<ICategory>();
 
-  innerCategory: ICategory | null = null;
+  constructor(private _formBuilder: FormBuilder) {}
 
   ngOnChanges() {
-    if (this.category) {
-      this.innerCategory = { ...this.category };
-    }
+
+    this.form = this._formBuilder.group(
+      {
+        id: [this.category?.id || ''],
+        name: [this.category?.name || '', [Validators.required, Validators.minLength(2)]],
+      }
+    );
+
+    this.form.controls['id'].disable();
+  }
+
+  save() {
+    this.savedRequested.emit({...this.category, ...this.form.value} as ICategory);
+  }
+
+  isError(controlName: string, error: string) {
+    return !!(this.form.controls[controlName].errors || [])[error];
   }
 }

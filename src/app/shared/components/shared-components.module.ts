@@ -8,7 +8,7 @@ import { UserInfoComponent } from './user-info/user-info.component';
 import { LeftMenuComponent } from './left-menu/left-menu.component';
 import { MoviesDetailsComponent } from './movies-details/movies-details.component';
 import { DivManipulationComponent } from './div-manipulation/div-manipulation.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { BoxComponent } from './div-manipulation/box/box.component';
 import { ListCategoriesComponent } from './categories/list/list.component';
 import { EditCategoryComponent } from './categories/edit/edit.component';
@@ -18,6 +18,7 @@ import {ListUsersComponent} from "./users/list/list.component";
 import {EditUserComponent} from "./users/edit/edit.component";
 import { ToggleComponent } from './toggle/toggle.component';
 import { CustomTableComponent } from './custom-table/custom-table.component';
+import { CustomFormComponent } from './custom-form/custom-form.component';
 
 const COMPONENTS: any[] = [
   ContainerComponent,
@@ -35,13 +36,14 @@ const COMPONENTS: any[] = [
   EditMovieComponent,
   ListUsersComponent,
   EditUserComponent,
+  ToggleComponent,
+  CustomTableComponent,
 ];
 
 @NgModule({
   declarations: [
     ...COMPONENTS,
-    ToggleComponent,
-    CustomTableComponent,
+    CustomFormComponent,
   ],
     exports: [
         ...COMPONENTS,
@@ -49,6 +51,7 @@ const COMPONENTS: any[] = [
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
   ]
 })
 export class SharedComponentsModule { }

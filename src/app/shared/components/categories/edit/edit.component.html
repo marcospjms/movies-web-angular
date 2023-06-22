@@ -1,17 +1,36 @@
-<div *ngIf="innerCategory" class="custom-form">
+<form
+  *ngIf="category"
+  [formGroup]="form"
+  class="custom-form">
   <label>
     Id
-    <input type="number" [(ngModel)]="innerCategory.id" disabled>
+    <input
+      type="number"
+      formControlName="id"
+    >
   </label>
 
   <label>
     Nome
-    <input type="text" [(ngModel)]="innerCategory.name">
+    <input
+      type="text"
+      formControlName="name"
+      [class.input-error]="form.controls['name'].invalid"
+    >
   </label>
+  <span *ngIf="isError('name', 'required')" class="input-error-msg">
+    Campo obrigatório
+  </span>
+  <span *ngIf="isError('name', 'minlength')" class="input-error-msg">
+    Tamanho inválido
+  </span>
 
-  <button (click)="!!innerCategory.name ? savedRequested.emit(innerCategory): null">
-    <span *ngIf="innerCategory.id">Salvar</span>
-    <span *ngIf="!innerCategory.id">Criar</span>
+  <button
+    [disabled]="form.invalid"
+    (click)="save()"
+  >
+    <span *ngIf="category.id">Salvar</span>
+    <span *ngIf="!category.id">Criar</span>
   </button>
 
-</div>
+</form>
