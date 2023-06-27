@@ -1,8 +1,24 @@
 
 .custom-table {
+  border-collapse: collapse;
+  width: 100%;
   thead td {
     padding: 1em;
     border: 1px solid black;
+  }
+  tbody {
+    tr {
+      &:nth-child(even) {
+        background-color: #e0d8d8;
+      }
+      td {
+        padding: 1em;
+        button {
+          display: inline-block;
+          margin: 0 0.5em;
+        }
+      }
+    }
   }
 }
 
