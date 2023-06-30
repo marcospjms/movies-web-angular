@@ -1,27 +1,6 @@
-<div *ngIf="innerMovie" class="custom-form">
-  <label>
-    Id
-    <input type="number" [(ngModel)]="innerMovie.id" disabled>
-  </label>
-
-  <label>
-    Nome
-    <input type="text" [(ngModel)]="innerMovie.name">
-  </label>
-
-  <label>
-    Categoria
-    <select [(ngModel)]="innerMovie.category" [compareWith]="compareCategory">
-      <option [value]="null">Nenhuma</option>
-      <option *ngFor="let category of categories" [ngValue]="category">
-        #{{ category.id }} - {{ category.name }}
-      </option>
-    </select>
-  </label>
-
-  <button (click)="(!!innerMovie.name && !!innerMovie.category) ? save(): null">
-    <span *ngIf="innerMovie.id">Salvar</span>
-    <span *ngIf="!innerMovie.id">Criar</span>
-  </button>
-
-</div>
+<app-custom-form
+  [fields]="fields"
+  [model]="movie"
+  (saveRequested)="saveRequested.emit($event)"
+>
+</app-custom-form>

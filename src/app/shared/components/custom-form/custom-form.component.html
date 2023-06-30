@@ -1,1 +1,53 @@
-<p>custom-form works!</p>
+<form
+  [formGroup]="formGroup"
+  (submit)="save()"
+  class="custom-form"
+>
+
+  <ng-container *ngFor="let field of fields">
+    <label *ngIf="field.type === 'text' || field.type === 'select'">
+      {{ field.label }}
+      <input
+        *ngIf="field.type === 'text'"
+        type="text"
+        [formControlName]="field.property"
+      >
+      <select
+        *ngIf="field.type === 'select'"
+        [formControlName]="field.property" [compareWith]="compareFunction.bind(this, field)">
+        <option *ngFor="let option of field.options" [ngValue]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+    </label>
+    <span *ngIf="field.type !== 'list' && isError(field.property, 'required')" class="input-error-msg">
+      Campo obrigatório
+    </span>
+    <div
+      *ngIf="field.type === 'list'"
+      class="crud-roles">
+      {{ field.label }}
+          <span *ngFor="let entity of innerModel[field.property]; let i = index">
+            {{ entity }} <button style="color: red" (click)="deleteEntity(field, i)">X</button>
+          </span>
+          <select [formControlName]="field.property + '_list'">
+            <option *ngFor="let entity of field.options" [ngValue]="entity.value">
+              {{ entity.label }}
+            </option>
+          </select>
+          <button
+            [disabled]="formGroup.controls[field.property + '_list'].invalid"
+            (click)="addEntity(field)"
+          >
+            Adicionar
+          </button>
+        </div>
+  </ng-container>
+
+  <button
+    [disabled]="formGroup.invalid"
+  >
+    <span *ngIf="model.id">Salvar</span>
+    <span *ngIf="!model.id">Criar</span>
+  </button>
+</form>

@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
 import {IUser, rolesEnum} from "../../../model/user.interface";
+import {formFieldTypeEnum, IFormField} from "../../../model/form-field";
 
 @Component({
   selector: 'app-edit-user',
@@ -12,12 +13,32 @@ export class EditUserComponent implements OnChanges {
   user: IUser | null = null;
 
   @Output()
-  savedRequested: EventEmitter<IUser> = new EventEmitter<IUser>();
+  saveRequested: EventEmitter<IUser> = new EventEmitter<IUser>();
 
   innerUser: IUser | null = null;
 
   roles: rolesEnum[] = Object.keys(rolesEnum).map(role => role.toLowerCase()) as rolesEnum[];
   selectedRole: rolesEnum | null = null;
+
+  fields: IFormField[] =  [
+    {
+      property: 'id',
+      label: 'Id',
+      type: formFieldTypeEnum.text,
+      disabled: true,
+    },
+    {
+      property: 'name',
+      label: 'Nome',
+      type: formFieldTypeEnum.text,
+    },
+    {
+      property: 'roles',
+      label: 'Papeis',
+      type: formFieldTypeEnum.list,
+      options: Object.keys(rolesEnum).map(role => ({ label: role, value: role })),
+    },
+  ]
 
   get validRoles() {
     return this.roles.filter(role => !this.innerUser?.roles.includes(role));
@@ -40,10 +61,9 @@ export class EditUserComponent implements OnChanges {
   }
 
   save() {
-    console.log(this.innerUser);
     if (!this.innerUser?.name) {
       return;
     }
-     this.savedRequested.emit(this.innerUser);
+     this.saveRequested.emit(this.innerUser);
   }
 }

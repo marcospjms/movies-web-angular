@@ -75,7 +75,6 @@ export class ContainerComponent {
   saveUser(user: IUser) {
     const foundUser = this.users.find(c => c.id === user.id);
     if (foundUser) {
-      console.log(foundUser, user)
       Object.assign(foundUser, user, { roles: [...user.roles]});
     } else {
       const nextId = Math.max(...this.users.map(c => c.id));

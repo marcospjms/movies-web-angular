@@ -1,35 +1,42 @@
-<div *ngIf="innerUser" class="custom-form">
-  <label>
-    Id
-    <input type="number" [(ngModel)]="innerUser.id" disabled>
-  </label>
+<app-custom-form
+  [fields]="fields"
+  [model]="user"
+  (saveRequested)="saveRequested.emit($event)"
+>
+</app-custom-form>
 
-  <label>
-    Nome
-    <input type="text" [(ngModel)]="innerUser.name">
-  </label>
+<!--<div *ngIf="innerUser" class="custom-form">-->
+<!--  <label>-->
+<!--    Id-->
+<!--    <input type="number" [(ngModel)]="innerUser.id" disabled>-->
+<!--  </label>-->
 
-  <div class="crud-roles">
-    Papeis
-    <span *ngFor="let role of innerUser.roles; let i = index">
-      {{ role }} <button style="color: red" (click)="deleteRole(i)">X</button>
-    </span>
-    <select [(ngModel)]="selectedRole">
-      <option *ngFor="let role of validRoles">
-        {{ role }}
-      </option>
-    </select>
-    <button
-      [disabled]="!selectedRole"
-      (click)="addRole()"
-    >
-      Adicionar
-    </button>
-  </div>
+<!--  <label>-->
+<!--    Nome-->
+<!--    <input type="text" [(ngModel)]="innerUser.name">-->
+<!--  </label>-->
 
-  <button (click)="save()">
-    <span *ngIf="innerUser.id">Salvar</span>
-    <span *ngIf="!innerUser.id">Criar</span>
-  </button>
+<!--  <div class="crud-roles">-->
+<!--    Papeis-->
+<!--    <span *ngFor="let role of innerUser.roles; let i = index">-->
+<!--      {{ role }} <button style="color: red" (click)="deleteRole(i)">X</button>-->
+<!--    </span>-->
+<!--    <select [(ngModel)]="selectedRole">-->
+<!--      <option *ngFor="let role of validRoles">-->
+<!--        {{ role }}-->
+<!--      </option>-->
+<!--    </select>-->
+<!--    <button-->
+<!--      [disabled]="!selectedRole"-->
+<!--      (click)="addRole()"-->
+<!--    >-->
+<!--      Adicionar-->
+<!--    </button>-->
+<!--  </div>-->
 
-</div>
+<!--  <button (click)="save()">-->
+<!--    <span *ngIf="innerUser.id">Salvar</span>-->
+<!--    <span *ngIf="!innerUser.id">Criar</span>-->
+<!--  </button>-->
+
+<!--</div>-->

@@ -13,7 +13,7 @@
     <app-edit-category
       *ngIf="selectedCategory"
       [category]="selectedCategory"
-      (savedRequested)="saveCategory($event)"
+      (saveRequested)="saveCategory($event)"
     >
     </app-edit-category>
   </app-toggle>
@@ -28,7 +28,7 @@
       *ngIf="selectedMovie"
       [movie]="selectedMovie"
       [categories]="categories"
-      (savedRequested)="saveMovie($event)"
+      (saveRequested)="saveMovie($event)"
     >
     </app-edit-movie>
   </app-toggle>
@@ -42,7 +42,7 @@
     <app-edit-user
       *ngIf="selectedUser"
       [user]="selectedUser"
-      (savedRequested)="saveUser($event)"
+      (saveRequested)="saveUser($event)"
     >
     </app-edit-user>
   </app-toggle>
