@@ -43,6 +43,7 @@ export class ContainerComponent {
   selectedCategory: ICategory | null = null;
   selectedMovie: IMovie | null = null;
   selectedUser: IUser | null = null;
+  currentDate: Date = new Date();
 
   constructor() {
   }

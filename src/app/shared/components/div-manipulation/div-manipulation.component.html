@@ -31,11 +31,20 @@
 </div>
 <div
   class="manipulation-container">
-  <app-box
+<!--  <app-box-->
+<!--    *ngFor="let box of boxes"-->
+<!--    [box]="box"-->
+<!--    [ref]="box.transform"-->
+<!--    (mousedown)="startMoving($event, box)"-->
+<!--  >-->
+<!--  </app-box>-->
+
+  <div
     *ngFor="let box of boxes"
+    appBox2
     [box]="box"
     [ref]="box.transform"
     (mousedown)="startMoving($event, box)"
   >
-  </app-box>
+  </div>
 </div>

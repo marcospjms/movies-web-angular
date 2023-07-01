@@ -4,7 +4,7 @@
 
 <div class="entities-container">
   <app-toggle
-    label="Categorias"
+    [label]="'Categorias' | customTitle: categories"
   >
     <app-list-categories
       [categories]="categories"
@@ -18,7 +18,7 @@
     </app-edit-category>
   </app-toggle>
   <app-toggle
-    label="Filmes"
+    [label]="'Filmes' | customTitle: movies"
   >
     <app-list-movies
       [movies]="movies"
@@ -33,7 +33,7 @@
     </app-edit-movie>
   </app-toggle>
   <app-toggle
-    label="Usuários"
+    [label]="'Usuários' | customTitle: users"
   >
     <app-list-users
       [users]="users"
@@ -46,5 +46,9 @@
     >
     </app-edit-user>
   </app-toggle>
+
+  <div>
+    {{ currentDate | date: 'dd/MM/yyyy hh:mm' }}
+  </div>
 </div>
 
