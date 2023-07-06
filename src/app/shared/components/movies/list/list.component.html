@@ -1,9 +1,9 @@
 <app-custom-table
   title="Filmes"
   [header]="header"
-  [data]="movies"
+  [data]="movies || []"
   (selectedEntity)="selectedMovie.emit($event)"
-  (deletedEntity)="deleteMovie($event.index)"
+  (deletedEntity)="deleteMovie($event.model.id)"
   (creationRequest)="createMovie()"
 >
 </app-custom-table>

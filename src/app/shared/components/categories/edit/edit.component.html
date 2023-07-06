@@ -1,6 +1,6 @@
 <app-custom-form
   [fields]="fields"
   [model]="category"
-  (saveRequested)="saveRequested.emit($event)"
+  (saveRequested)="categoryService.saveOrUpdate($event); unselected.emit($event)"
 >
 </app-custom-form>

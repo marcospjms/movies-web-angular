@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {IUser} from "../../../model/user.interface";
 import {ITableHeaderCell} from "../../../model/table-header.interface";
+import {UserService} from "../../../services/user.service";
 
 @Component({
   selector: 'app-list-users',
@@ -8,9 +9,6 @@ import {ITableHeaderCell} from "../../../model/table-header.interface";
   styleUrls: ['./list.component.scss']
 })
 export class ListUsersComponent {
-
-  @Input()
-  users: IUser[] = [];
 
   @Output()
   selectedUser: EventEmitter<IUser> = new EventEmitter<IUser>();
@@ -28,13 +26,16 @@ export class ListUsersComponent {
       label: 'Papeis',
       property: 'roles'
     }
-  ]
+  ];
+
+  constructor(public userService: UserService) {
+  }
 
   createUser() {
     this.selectedUser.emit({} as IUser);
   }
 
-  deleteUser(index: number) {
-    this.users.splice(index, 1);
+  deleteUser(id: number) {
+    this.userService.delete(id)
   }
 }

@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {ICategory} from "../../../model/category.interface";
 import {FormBuilder} from "@angular/forms";
 import {formFieldTypeEnum, IFormField} from "../../../model/form-field";
+import {CategoryService} from "../../../services/category.service";
 
 @Component({
   selector: 'app-edit-category',
@@ -14,7 +15,7 @@ export class EditCategoryComponent {
   category: ICategory | null = null;
 
   @Output()
-  saveRequested: EventEmitter<ICategory> = new EventEmitter<ICategory>();
+  unselected: EventEmitter<ICategory> = new EventEmitter<ICategory>();
 
   fields: IFormField[] = [
     {
@@ -30,5 +31,8 @@ export class EditCategoryComponent {
     },
   ];
 
-  constructor(private _formBuilder: FormBuilder) {}
+  constructor(
+    private _formBuilder: FormBuilder,
+    public categoryService: CategoryService,
+  ) {}
 }

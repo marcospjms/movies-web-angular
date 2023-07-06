@@ -36,6 +36,7 @@
             </option>
           </select>
           <button
+            type="button"
             [disabled]="formGroup.controls[field.property + '_list'].invalid"
             (click)="addEntity(field)"
           >

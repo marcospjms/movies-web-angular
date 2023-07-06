@@ -21,6 +21,7 @@ import { CustomTableComponent } from './components/custom-table/custom-table.com
 import { CustomFormComponent } from './components/custom-form/custom-form.component';
 import { Box2Directive } from './components/div-manipulation/box/box2.directive';
 import {CustomTitlePipe} from "./pipes/custom-title.pipe";
+import {CategoryService} from "./services/category.service";
 
 const COMPONENTS: any[] = [
   ContainerComponent,

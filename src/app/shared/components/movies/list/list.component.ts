@@ -1,16 +1,16 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {IMovie} from "../../../model/movie.interface";
 import {ITableHeaderCell} from "../../../model/table-header.interface";
+import {MovieService} from "../../../services/movie.service";
 
 @Component({
   selector: 'app-list-movies',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
-export class ListMoviesComponent {
+export class ListMoviesComponent implements OnInit {
 
-  @Input()
-  movies: IMovie[] = [];
+  movies: IMovie[] | undefined = [];
 
   @Output()
   selectedMovie: EventEmitter<IMovie> = new EventEmitter<IMovie>();
@@ -32,11 +32,18 @@ export class ListMoviesComponent {
     },
   ];
 
+  constructor(private _movieService: MovieService) {
+  }
+
+  async ngOnInit() {
+    this.movies = await this._movieService.list().toPromise();
+  }
+
   createMovie() {
     this.selectedMovie.emit({} as IMovie);
   }
 
-  deleteMovie(index: number) {
-    this.movies.splice(index, 1);
+  deleteMovie(id: number) {
+    this._movieService.delete(id)
   }
 }

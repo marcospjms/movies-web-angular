@@ -1,6 +1,7 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {ICategory} from "../../../model/category.interface";
 import {ITableHeaderCell} from "../../../model/table-header.interface";
+import {CategoryService} from "../../../services/category.service";
 
 @Component({
   selector: 'app-list-categories',
@@ -8,9 +9,6 @@ import {ITableHeaderCell} from "../../../model/table-header.interface";
   styleUrls: ['./list.component.scss']
 })
 export class ListCategoriesComponent {
-
-  @Input()
-  categories: ICategory[] = [];
 
   @Output()
   selectedCategory: EventEmitter<ICategory> = new EventEmitter<ICategory>();
@@ -26,11 +24,15 @@ export class ListCategoriesComponent {
     }
   ];
 
-  createCategory() {
-    this.selectedCategory.emit({} as ICategory);
+  constructor(public categoryService: CategoryService) {
   }
 
-  deleteCategory(index: number) {
-    this.categories.splice(index, 1);
+  createCategory() {
+    const newCategory = {} as ICategory;
+    this.selectedCategory.emit(newCategory);
+  }
+
+  deleteCategory(id: number) {
+    this.categoryService.delete(id)
   }
 }
