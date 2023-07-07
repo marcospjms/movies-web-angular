@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {ICategory} from "../../../model/category.interface";
 import {FormBuilder} from "@angular/forms";
 import {formFieldTypeEnum, IFormField} from "../../../model/form-field";
@@ -10,12 +10,6 @@ import {CategoryService} from "../../../services/category.service";
   styleUrls: ['./edit.component.scss']
 })
 export class EditCategoryComponent {
-
-  @Input()
-  category: ICategory | null = null;
-
-  @Output()
-  unselected: EventEmitter<ICategory> = new EventEmitter<ICategory>();
 
   fields: IFormField[] = [
     {

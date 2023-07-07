@@ -8,12 +8,7 @@ import {MovieService} from "../../../services/movie.service";
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
-export class ListMoviesComponent implements OnInit {
-
-  movies: IMovie[] | undefined = [];
-
-  @Output()
-  selectedMovie: EventEmitter<IMovie> = new EventEmitter<IMovie>();
+export class ListMoviesComponent {
 
   header: ITableHeaderCell[] = [
     {
@@ -32,18 +27,6 @@ export class ListMoviesComponent implements OnInit {
     },
   ];
 
-  constructor(private _movieService: MovieService) {
-  }
-
-  async ngOnInit() {
-    this.movies = await this._movieService.list().toPromise();
-  }
-
-  createMovie() {
-    this.selectedMovie.emit({} as IMovie);
-  }
-
-  deleteMovie(id: number) {
-    this._movieService.delete(id)
+  constructor(protected movieService: MovieService) {
   }
 }

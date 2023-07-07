@@ -1,3 +1,5 @@
+<h1 class="custom-title">{{ title }}</h1>
+
 <table class="custom-table">
   <thead>
     <tr>
@@ -14,12 +16,16 @@
         {{ (cell.formatter ? cell.formatter(row) : row[cell.property || '']) || '-' }}
       </td>
       <td>
-        <button (click)="selectedEntity.emit(row)">Editar</button>
-        <button (click)="deletedEntity.emit({ model: row, index: i })">Excluir</button>
+        <button [routerLink]="[row.id]">Editar</button>
+        <button (click)="service?.delete(row.id)">Excluir</button>
       </td>
       <td></td>
     </tr>
   </tbody>
 </table>
 
-<button class="create-entity" (click)="creationRequest.emit(true)">Criar {{ title }}</button>
+<button
+  class="create-entity"
+  [routerLink]="['novo']">
+  Criar {{ title }}
+</button>

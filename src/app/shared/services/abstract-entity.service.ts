@@ -19,7 +19,11 @@ export class AbstractEntityService<E extends IEntity> {
     return of(this.entities);
   }
 
-  saveOrUpdate(e: E) {
+  get(id: number): Observable<E | null> {
+    return of(this.entities.find(e => e.id === id) || null);
+  }
+
+  saveOrUpdate(e: E): Observable<E> {
     const foundCategory = this.entities.find(c => c.id === e.id);
     if (foundCategory) {
       Object.assign(foundCategory, e);
@@ -28,6 +32,7 @@ export class AbstractEntityService<E extends IEntity> {
       this.entities.push({...e, id: nextId + 1});
     }
     localStorage.setItem(this._storeKey, JSON.stringify(this.entities));
+    return of(e);
   }
 
   delete(id: number) {

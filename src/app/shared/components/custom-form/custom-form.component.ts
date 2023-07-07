@@ -1,6 +1,8 @@
 import {Component, Input, Output, EventEmitter, OnChanges} from '@angular/core';
 import {IFormField} from "../../model/form-field";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AbstractEntityService} from "../../services/abstract-entity.service";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-custom-form',
@@ -10,22 +12,34 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 export class CustomFormComponent implements OnChanges {
 
   @Input()
+  title: string = '';
+
+  @Input()
   fields: IFormField[] = [];
 
   @Input()
+  service: AbstractEntityService<any> | null = null;
+
   model: any = {};
 
   innerModel: any = {};
 
-  @Output()
-  saveRequested: EventEmitter<any> = new EventEmitter<any>();
+  formGroup: FormGroup | null = null;
 
-  formGroup: FormGroup = this._formBuilder.group({});
-
-  constructor(private _formBuilder: FormBuilder) {
+  constructor(
+    private _activatedRoute: ActivatedRoute,
+    private _router: Router,
+    private _formBuilder: FormBuilder,
+  ) {
   }
 
-  ngOnChanges(): void {
+  async ngOnChanges() {
+    const id = this._activatedRoute.snapshot.paramMap.get('id');
+    if (id && id != 'novo') {
+      this.model = await this.service?.get(+id).toPromise();
+    } else {
+      this.model = {};
+    }
     this.innerModel = {...this.model};
     const formConfig: any = {};
 
@@ -45,13 +59,13 @@ export class CustomFormComponent implements OnChanges {
   }
 
   isError(controlName: string, error: string) {
-    return !!(this.formGroup.controls[controlName].errors || [])[error];
+    return !!(this.formGroup?.controls[controlName].errors || [])[error];
   }
 
 
   addEntity(field: IFormField) {
     this.innerModel[field.property] = (this.innerModel[field.property] || []).concat([
-      this.formGroup.controls[field.property + '_list'].value.toLowerCase(),
+      this.formGroup?.controls[field.property + '_list'].value.toLowerCase(),
     ]);
   }
 
@@ -60,8 +74,9 @@ export class CustomFormComponent implements OnChanges {
   }
 
 
-  save() {
-    this.saveRequested.emit({...this.innerModel, ...this.formGroup.value});
+  async save() {
+    await this.service?.saveOrUpdate({...this.innerModel, ...this.formGroup?.value}).toPromise();
+    this._router.navigate(['../'], { relativeTo: this._activatedRoute })
   }
 
 }

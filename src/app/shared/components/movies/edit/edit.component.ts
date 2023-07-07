@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
+import {Component, Input, OnChanges} from '@angular/core';
 import {IMovie} from "../../../model/movie.interface";
 import {ICategory} from "../../../model/category.interface";
 import {formFieldTypeEnum, IFormField} from "../../../model/form-field";
@@ -11,12 +11,6 @@ import {MovieService} from "../../../services/movie.service";
   styleUrls: ['./edit.component.scss']
 })
 export class EditMovieComponent implements OnChanges {
-
-  @Input()
-  movie: IMovie | null = null;
-
-  @Output()
-  unselected: EventEmitter<IMovie> = new EventEmitter<IMovie>();
 
   fields: IFormField[] = []
 

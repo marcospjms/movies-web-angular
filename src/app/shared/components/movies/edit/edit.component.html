@@ -1,6 +1,5 @@
 <app-custom-form
   [fields]="fields"
-  [model]="movie"
-  (saveRequested)="movieService.saveOrUpdate($event); unselected.emit($event)"
+  [service]="movieService"
 >
 </app-custom-form>

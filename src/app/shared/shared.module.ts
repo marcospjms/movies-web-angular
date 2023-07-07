@@ -22,6 +22,7 @@ import { CustomFormComponent } from './components/custom-form/custom-form.compon
 import { Box2Directive } from './components/div-manipulation/box/box2.directive';
 import {CustomTitlePipe} from "./pipes/custom-title.pipe";
 import {CategoryService} from "./services/category.service";
+import {RouterModule, RouterOutlet} from "@angular/router";
 
 const COMPONENTS: any[] = [
   ContainerComponent,
@@ -67,6 +68,7 @@ const PIPES = [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    RouterModule,
   ]
 })
 export class SharedModule { }

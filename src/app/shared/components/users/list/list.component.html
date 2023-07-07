@@ -1,9 +1,6 @@
 <app-custom-table
   title="usuário"
   [header]="header"
-  [data]="(userService.list() | async) || []"
-  (selectedEntity)="selectedUser.emit($event)"
-  (deletedEntity)="deleteUser($event.model.id)"
-  (creationRequest)="createUser()"
+  [service]="userService"
 >
 </app-custom-table>

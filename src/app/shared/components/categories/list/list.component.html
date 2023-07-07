@@ -1,9 +1,6 @@
 <app-custom-table
   title="categoria"
   [header]="header"
-  [data]="(categoryService.list() | async) || []"
-  (selectedEntity)="selectedCategory.emit($event)"
-  (deletedEntity)="deleteCategory($event.model.id)"
-  (creationRequest)="createCategory()"
+  [service]="categoryService"
 >
 </app-custom-table>

@@ -1,20 +1,23 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ITableHeaderCell} from "../../model/table-header.interface";
+import {AbstractEntityService} from "../../services/abstract-entity.service";
 
 @Component({
   selector: 'app-custom-table',
   templateUrl: './custom-table.component.html',
   styleUrls: ['./custom-table.component.scss']
 })
-export class CustomTableComponent {
+export class CustomTableComponent implements OnInit {
 
   @Input()
   title: string = '';
 
   @Input()
-  header: ITableHeaderCell[] = [];
+  service: AbstractEntityService<any> | null = null;
 
   @Input()
+  header: ITableHeaderCell[] = [];
+
   data: any[] = [];
 
   @Output()
@@ -23,6 +26,8 @@ export class CustomTableComponent {
   @Output()
   deletedEntity: EventEmitter<{ model: any, index: number }> = new EventEmitter<{ model: any, index: number }>();
 
-  @Output()
-  creationRequest: EventEmitter<boolean> = new EventEmitter<boolean>();
+  async ngOnInit() {
+    this.data = await this.service?.list().toPromise() || [];
+  }
+
 }

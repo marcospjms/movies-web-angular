@@ -1,4 +1,12 @@
+<h1
+  [routerLink]="['../']"
+  class="custom-title"
+  style="cursor: pointer"
+>{{ title }}
+</h1>
+
 <form
+  *ngIf="formGroup"
   [formGroup]="formGroup"
   (submit)="save()"
   class="custom-form"

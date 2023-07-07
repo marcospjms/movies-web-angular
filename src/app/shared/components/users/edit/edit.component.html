@@ -1,6 +1,5 @@
 <app-custom-form
   [fields]="fields"
-  [model]="user"
-  (saveRequested)="userService.saveOrUpdate($event); unselected.emit($event)"
+  [service]="userService"
 >
 </app-custom-form>

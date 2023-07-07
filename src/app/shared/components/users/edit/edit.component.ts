@@ -13,9 +13,6 @@ export class EditUserComponent implements OnChanges {
   @Input()
   user: IUser | null = null;
 
-  @Output()
-  unselected: EventEmitter<IUser> = new EventEmitter<IUser>();
-
   innerUser: IUser | null = null;
 
   fields: IFormField[] =  [

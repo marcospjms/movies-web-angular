@@ -3,47 +3,9 @@
 </app-sidebar>
 
 <div class="entities-container">
-  <app-toggle
-    [label]="'Categorias' | customTitle: ((categoryService.list() | async) || [])"
-  >
-    <app-list-categories
-      (selectedCategory)="selectedCategory = $event">
-    </app-list-categories>
-    <app-edit-category
-      *ngIf="selectedCategory"
-      [category]="selectedCategory"
-      (unselected)="selectedCategory = null"
-    >
-    </app-edit-category>
-  </app-toggle>
-  <app-toggle
-    [label]="'Filmes' | customTitle: ((movieService.list() | async) || [])"
-  >
-    <app-list-movies
-      (selectedMovie)="selectedMovie = $event">
-    </app-list-movies>
-    <app-edit-movie
-      *ngIf="selectedMovie"
-      [movie]="selectedMovie"
-      (unselected)="selectedMovie = null"
-    >
-    </app-edit-movie>
-  </app-toggle>
-  <app-toggle
-    [label]="'Usuários' | customTitle: ((userService.list() | async) || [])"
-  >
-    <app-list-users
-      (selectedUser)="selectedUser = $event">
-    </app-list-users>
-    <app-edit-user
-      *ngIf="selectedUser"
-      [user]="selectedUser"
-      (unselected)="selectedUser = null"
-    >
-    </app-edit-user>
-  </app-toggle>
+  <router-outlet></router-outlet>
 
-  <div>
+  <div style="margin-top: 1em">
     {{ currentDate | date: 'dd/MM/yyyy hh:mm' }}
   </div>
 </div>

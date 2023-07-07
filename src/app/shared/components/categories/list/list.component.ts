@@ -26,13 +26,4 @@ export class ListCategoriesComponent {
 
   constructor(public categoryService: CategoryService) {
   }
-
-  createCategory() {
-    const newCategory = {} as ICategory;
-    this.selectedCategory.emit(newCategory);
-  }
-
-  deleteCategory(id: number) {
-    this.categoryService.delete(id)
-  }
 }

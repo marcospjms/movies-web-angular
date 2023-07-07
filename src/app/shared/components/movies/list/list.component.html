@@ -1,9 +1,6 @@
 <app-custom-table
   title="Filmes"
   [header]="header"
-  [data]="movies || []"
-  (selectedEntity)="selectedMovie.emit($event)"
-  (deletedEntity)="deleteMovie($event.model.id)"
-  (creationRequest)="createMovie()"
+  [service]="movieService"
 >
 </app-custom-table>

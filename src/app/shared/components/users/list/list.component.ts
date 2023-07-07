@@ -10,9 +10,6 @@ import {UserService} from "../../../services/user.service";
 })
 export class ListUsersComponent {
 
-  @Output()
-  selectedUser: EventEmitter<IUser> = new EventEmitter<IUser>();
-
   header: ITableHeaderCell[] = [
     {
       label: '#',
@@ -29,13 +26,5 @@ export class ListUsersComponent {
   ];
 
   constructor(public userService: UserService) {
-  }
-
-  createUser() {
-    this.selectedUser.emit({} as IUser);
-  }
-
-  deleteUser(id: number) {
-    this.userService.delete(id)
   }
 }
