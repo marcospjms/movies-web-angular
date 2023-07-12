@@ -1,0 +1,20 @@
+<form
+  *ngIf="form"
+  [formGroup]="form"
+  (submit)="login()">
+
+  <label>
+    Usuário
+    <input
+      formControlName="username"
+      type="text">
+  </label>
+  <label>
+    Senha
+    <input
+      formControlName="password"
+      type="password">
+  </label>
+
+  <button>Entrar</button>
+</form>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-left-menu',
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class LeftMenuComponent {
 
+  constructor(private _authService: AuthService) {
+  }
+
+  logout() {
+    this._authService.logout();
+  }
 }
