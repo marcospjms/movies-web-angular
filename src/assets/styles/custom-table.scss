@@ -30,3 +30,17 @@
 .create-entity {
   margin-top: 1em;
 }
+
+.custom-table-pagination {
+  text-align: center;
+  span {
+    display: inline-block;
+    padding: 1em;
+    background-color: aliceblue;
+    cursor: pointer;
+    border: 1px solid black;
+    &.activate-page {
+      background-color: white;
+    }
+  }
+}

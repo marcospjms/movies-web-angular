@@ -1,6 +1,10 @@
-import { Injectable } from '@angular/core';
-import {ICategory} from "../model/category.interface";
-import {Observable, of} from "rxjs";
+import {Observable} from "rxjs";
+import {HttpClient} from "@angular/common/http";
+
+export interface RemoteResult<E> {
+  results: E[];
+  count: number;
+}
 
 interface IEntity {
   id: number;
@@ -9,35 +13,37 @@ interface IEntity {
 export class AbstractEntityService<E extends IEntity> {
 
   constructor(
-    protected entities: E[] = [],
-    private _storeKey: string,
+    protected url: string,
+    private _httpClient: HttpClient,
   ) {
-    this.entities = localStorage.getItem(this._storeKey)  ? JSON.parse(localStorage.getItem(this._storeKey) || '[]') : this.entities;
   }
 
-  list(): Observable<E[]> {
-    return of(this.entities);
+  list(page: number = 0, size = 5): Observable<RemoteResult<E>> {
+    const params = [
+      `page=${page}`,
+      `size=${size}`,
+      `sort=id,`
+    ]
+    return this._httpClient.get<RemoteResult<E>>(`${this.url}?${params.join('&')}`);
   }
 
   get(id: number): Observable<E | null> {
-    return of(this.entities.find(e => e.id === id) || null);
+    return this._httpClient.get<E>(this._getFinalUrl(id));
   }
 
   saveOrUpdate(e: E): Observable<E> {
-    const foundCategory = this.entities.find(c => c.id === e.id);
-    if (foundCategory) {
-      Object.assign(foundCategory, e);
-    } else {
-      const nextId = Math.max(...this.entities.map(c => c.id));
-      this.entities.push({...e, id: nextId + 1});
+    if (e.id) {
+      return this._httpClient.put<E>(this._getFinalUrl(e.id), e);
     }
-    localStorage.setItem(this._storeKey, JSON.stringify(this.entities));
-    return of(e);
+    return this._httpClient.post<E>(`${this.url}`, e);
   }
 
-  delete(id: number) {
-    const index = this.entities.findIndex(entity => entity.id === id);
-    this.entities.splice(index, 1);
-    localStorage.setItem(this._storeKey, JSON.stringify(this.entities));
+  delete(id: number): Observable<boolean> {
+    return this._httpClient.delete<boolean>(this._getFinalUrl(id));
   }
+
+  private _getFinalUrl(id: number) {
+    return `${this.url}/${id}`;
+  }
+
 }

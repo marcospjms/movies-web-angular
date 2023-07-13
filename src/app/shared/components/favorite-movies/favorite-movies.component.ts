@@ -11,9 +11,9 @@ export class FavoriteMoviesComponent {
   newFile: string = '';
 
   movies: IMovie[] = [
-    { id: 1, name: 'Batman', description: 'Filme sobre o homem morcego', rate: 5, favorite: true, },
-    { id: 2, name: 'Batman e robing', description: 'Filme sobre o homem morcego e seu parceiro', rate: 4, favorite: true },
-    { id: 3, name: 'Outro filme', description: 'Outro filme', rate: 1, favorite: true },
+    { id: 1, title: 'Batman', description: 'Filme sobre o homem morcego', rate: 5, favorite: true, },
+    { id: 2, title: 'Batman e robing', description: 'Filme sobre o homem morcego e seu parceiro', rate: 4, favorite: true },
+    { id: 3, title: 'Outro filme', description: 'Outro filme', rate: 1, favorite: true },
   ];
 
   get favoriteMovies() {

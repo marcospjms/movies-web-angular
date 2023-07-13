@@ -2,7 +2,7 @@ import {ICategory} from "./category.interface";
 
 export interface IMovie {
   id: number;
-  name: string;
+  title: string;
   description: string;
   rate: number;
   favorite: boolean;

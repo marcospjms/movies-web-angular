@@ -23,6 +23,7 @@ import { Box2Directive } from './components/div-manipulation/box/box2.directive'
 import {CustomTitlePipe} from "./pipes/custom-title.pipe";
 import {CategoryService} from "./services/category.service";
 import {RouterModule, RouterOutlet} from "@angular/router";
+import {HttpClientModule} from "@angular/common/http";
 
 const COMPONENTS: any[] = [
   ContainerComponent,
@@ -69,6 +70,7 @@ const PIPES = [
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
+    HttpClientModule,
   ]
 })
 export class SharedModule { }

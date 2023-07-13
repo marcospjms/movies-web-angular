@@ -1,28 +1,42 @@
 <h1 class="custom-title">{{ title }}</h1>
 
-<table class="custom-table">
-  <thead>
-    <tr>
-      <td *ngFor="let cell of header">
-        {{ cell.label }}
-      </td>
-      <td>Ações</td>
-      <td></td>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let row of data; let i = index">
-      <td *ngFor="let cell of header">
-        {{ (cell.formatter ? cell.formatter(row) : row[cell.property || '']) || '-' }}
-      </td>
-      <td>
-        <button [routerLink]="[row.id]">Editar</button>
-        <button (click)="service?.delete(row.id)">Excluir</button>
-      </td>
-      <td></td>
-    </tr>
-  </tbody>
-</table>
+<div *ngIf="loading" style="text-align: center">Carregando...</div>
+
+<ng-container *ngIf="!loading">
+  <table class="custom-table">
+    <thead>
+      <tr>
+        <td *ngFor="let cell of header">
+          {{ cell.label }}
+        </td>
+        <td>Ações</td>
+        <td></td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of data; let i = index">
+        <td *ngFor="let cell of header">
+          {{ (cell.formatter ? cell.formatter(row) : row[cell.property || '']) || '-' }}
+        </td>
+        <td>
+          <button [routerLink]="[row.id]">Editar</button>
+          <button (click)="delete(row.id)">Excluir</button>
+        </td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="custom-table-pagination">
+    <span
+      *ngFor="let page of pages"
+      [class.activate-page]="page === currentPage"
+      (click)="fetch(page)"
+    >
+      {{ page + 1 }}
+    </span>
+  </div>
+</ng-container>
 
 <button
   class="create-entity"

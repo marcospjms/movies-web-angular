@@ -1,4 +1,5 @@
 <app-custom-form
+  *ngIf="fields && fields.length > 0"
   [fields]="fields"
   [service]="movieService"
 >

@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ITableHeaderCell} from "../../model/table-header.interface";
-import {AbstractEntityService} from "../../services/abstract-entity.service";
+import {AbstractEntityService, RemoteResult} from "../../services/abstract-entity.service";
 
 @Component({
   selector: 'app-custom-table',
@@ -26,8 +26,36 @@ export class CustomTableComponent implements OnInit {
   @Output()
   deletedEntity: EventEmitter<{ model: any, index: number }> = new EventEmitter<{ model: any, index: number }>();
 
+  currentPage = 0;
+  pageSize = 5;
+  totalEntities = 0;
+  pages = [0];
+
+  loading = false;
+
   async ngOnInit() {
-    this.data = await this.service?.list().toPromise() || [];
+    await this.fetch(this.currentPage);
   }
 
+  async fetch(page: number, pageSize = 5) {
+    this.loading = true;
+    this.currentPage = page;
+    this.pageSize = pageSize;
+    const result: RemoteResult<any> | undefined = await this.service?.list(this.currentPage, this.pageSize).toPromise();
+    if (!result) {
+      throw 'Not found';
+    }
+    this.data = result.results;
+    this.totalEntities = result.count;
+    this.pages = [];
+    for (let i = 0; i < this.totalEntities / this.pageSize; i++) {
+      this.pages.push(i);
+    }
+    this.loading = false;
+  }
+
+  async delete(id: number) {
+    await this.service?.delete(id)?.toPromise();
+    await this.fetch(this.currentPage);
+  }
 }

@@ -1,5 +1,4 @@
-import {Component, Input, OnChanges} from '@angular/core';
-import {IMovie} from "../../../model/movie.interface";
+import {Component, OnInit} from '@angular/core';
 import {ICategory} from "../../../model/category.interface";
 import {formFieldTypeEnum, IFormField} from "../../../model/form-field";
 import {CategoryService} from "../../../services/category.service";
@@ -10,7 +9,7 @@ import {MovieService} from "../../../services/movie.service";
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.scss']
 })
-export class EditMovieComponent implements OnChanges {
+export class EditMovieComponent implements OnInit {
 
   fields: IFormField[] = []
 
@@ -20,8 +19,8 @@ export class EditMovieComponent implements OnChanges {
   ) {
   }
 
-  async ngOnChanges() {
-    const categories = await this._categoryService.list().toPromise();
+  async ngOnInit() {
+    const categories: ICategory[] = [];
     this.fields = [
       {
         property: 'id',
@@ -30,19 +29,19 @@ export class EditMovieComponent implements OnChanges {
         disabled: true,
       },
       {
-        property: 'name',
-        label: 'Nome',
+        property: 'title',
+        label: 'Título',
         type: formFieldTypeEnum.text,
       },
-      {
-        property: 'category',
-        label: 'Categoria',
-        type: formFieldTypeEnum.select,
-        options: categories?.map(category => ({ label: category.name, value: category })),
-        compareFunc: (c1: ICategory, c2: ICategory) => {
-          return c1?.id === c2?.id;
-        },
-      },
+      // {
+      //   property: 'category',
+      //   label: 'Categoria',
+      //   type: formFieldTypeEnum.select,
+      //   options: categories.map(category => ({ label: category.name, value: category })),
+      //   compareFunc: (c1: ICategory, c2: ICategory) => {
+      //     return c1?.id === c2?.id;
+      //   },
+      // },
     ]
   }
 }

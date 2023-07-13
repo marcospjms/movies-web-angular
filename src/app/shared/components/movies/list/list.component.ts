@@ -17,7 +17,7 @@ export class ListMoviesComponent {
     },
     {
       label: 'Nome',
-      property: 'name',
+      property: 'title',
     },
     {
       label: 'Categoria',
