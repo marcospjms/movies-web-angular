@@ -6,6 +6,8 @@ import {AppComponent} from './app.component';
 import {SharedModule} from "./shared/shared.module";
 import {FormsModule} from "@angular/forms";
 import {AdminComponent} from "./admin.component";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {TokenInterceptor} from "./shared/interceptors/token.interceptor";
 
 @NgModule({
   declarations: [
@@ -18,7 +20,13 @@ import {AdminComponent} from "./admin.component";
     SharedModule,
     FormsModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
