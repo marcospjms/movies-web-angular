@@ -8,6 +8,7 @@ import {FormsModule} from "@angular/forms";
 import {AdminComponent} from "./admin.component";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {TokenInterceptor} from "./shared/interceptors/token.interceptor";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import {TokenInterceptor} from "./shared/interceptors/token.interceptor";
     AppRoutingModule,
     SharedModule,
     FormsModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     {

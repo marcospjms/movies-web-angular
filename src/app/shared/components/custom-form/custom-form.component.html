@@ -1,62 +1,91 @@
-<h1
-  [routerLink]="['../']"
-  class="custom-title"
-  style="cursor: pointer"
->{{ title }}
-</h1>
-
 <form
   *ngIf="formGroup"
   [formGroup]="formGroup"
   (submit)="save()"
   class="custom-form"
 >
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        <h1
+          [routerLink]="['../']"
+          class="custom-title"
+          style="cursor: pointer"
+        >{{ title }}
 
-  <ng-container *ngFor="let field of fields">
-    <label *ngIf="field.type === 'text' || field.type === 'select'">
-      {{ field.label }}
-      <input
-        *ngIf="field.type === 'text'"
-        type="text"
-        [formControlName]="field.property"
-      >
-      <select
-        *ngIf="field.type === 'select'"
-        [formControlName]="field.property" [compareWith]="compareFunction.bind(this, field)">
-        <option *ngFor="let option of field.options" [ngValue]="option.value">
-          {{ option.label }}
-        </option>
-      </select>
-    </label>
-    <span *ngIf="field.type !== 'list' && isError(field.property, 'required')" class="input-error-msg">
-      Campo obrigatório
-    </span>
-    <div
-      *ngIf="field.type === 'list'"
-      class="crud-roles">
-      {{ field.label }}
-          <span *ngFor="let entity of innerModel[field.property]; let i = index">
-            {{ entity }} <button style="color: red" (click)="deleteEntity(field, i)">X</button>
-          </span>
-          <select [formControlName]="field.property + '_list'">
-            <option *ngFor="let entity of field.options" [ngValue]="entity.value">
-              {{ entity.label }}
-            </option>
-          </select>
-          <button
-            type="button"
-            [disabled]="formGroup.controls[field.property + '_list'].invalid"
-            (click)="addEntity(field)"
+        </h1>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <ng-container *ngFor="let field of fields">
+        <mat-form-field
+          *ngIf="field.type === 'text'"
+          [appearance]="'outline'"
+        >
+          <mat-label>
+            {{ field.label}}
+          </mat-label>
+          <input
+            matInput
+            type="text"
+            [formControlName]="field.property"
           >
-            Adicionar
-          </button>
-        </div>
-  </ng-container>
-
-  <button
-    [disabled]="formGroup.invalid"
-  >
-    <span *ngIf="model.id">Salvar</span>
-    <span *ngIf="!model.id">Criar</span>
-  </button>
+        </mat-form-field>
+        <mat-form-field
+          *ngIf="field.type === 'select'"
+          appearance="outline"
+        >
+          <mat-label>{{ field.label }}</mat-label>
+          <mat-select
+            *ngIf="field.type === 'select'"
+            [formControlName]="field.property" [compareWith]="compareFunction.bind(this, field)">
+            <mat-option *ngFor="let option of field.options" [value]="option.value">
+              {{ option.label }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <span *ngIf="field.type !== 'list' && isError(field.property, 'required')" class="input-error-msg">
+          Campo obrigatório
+        </span>
+        <ng-container
+          *ngIf="field.type === 'list'">
+          <mat-chip-grid>
+            <mat-chip-row *ngFor="let entity of innerModel[field.property]; let i = index">
+              {{ entity }}
+              <button matChipRemove (click)="deleteEntity(field, i)">
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip-row>
+          </mat-chip-grid>
+        <mat-form-field appearance="outline">
+          <mat-label>{{ field.label }}</mat-label>
+              <mat-select [formControlName]="field.property + '_list'">
+                <mat-option *ngFor="let entity of field.options" [value]="entity.value">
+                  {{ entity.label }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+        <button
+          mat-icon-button
+          type="button"
+          [disabled]="formGroup.controls[field.property + '_list'].invalid"
+          (click)="addEntity(field)"
+          style="text-align: center"
+        >
+          <mat-icon>add</mat-icon>
+        </button>
+        </ng-container>
+      </ng-container>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        mat-raised-button
+        color="primary"
+        [disabled]="formGroup.invalid"
+      >
+        <span *ngIf="model.id">Salvar</span>
+        <span *ngIf="!model.id">Criar</span>
+      </button>
+    </mat-card-actions>
+  </mat-card>
 </form>

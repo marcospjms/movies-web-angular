@@ -24,6 +24,8 @@ import {CustomTitlePipe} from "./pipes/custom-title.pipe";
 import {CategoryService} from "./services/category.service";
 import {RouterModule, RouterOutlet} from "@angular/router";
 import {HttpClientModule} from "@angular/common/http";
+import {MaterialModule} from "./material.module";
+import {MatLegacyChipsModule} from "@angular/material/legacy-chips";
 
 const COMPONENTS: any[] = [
   ContainerComponent,
@@ -71,6 +73,7 @@ const PIPES = [
     ReactiveFormsModule,
     RouterModule,
     HttpClientModule,
+    MaterialModule,
   ]
 })
 export class SharedModule { }
