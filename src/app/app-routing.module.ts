@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {AdminComponent} from "./admin.component";
 import {LoggedGuard} from "./shared/guards/logged.guard";
 import {UnloggedGuard} from "./shared/guards/unlogged.guard";
+import {LoggedUserResolver} from "./shared/resolvers/logged-user.resolver";
 
 const routes: Routes = [
   {
@@ -19,6 +20,9 @@ const routes: Routes = [
     path: 'admin',
     component: AdminComponent,
     canActivate: [LoggedGuard],
+    resolve: {
+      loggedUser: LoggedUserResolver,
+    },
     children: [
       {
         path: '',
